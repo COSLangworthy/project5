@@ -1,10 +1,12 @@
 package com.careersforyou.jobservice.persistence;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
+
 import com.careersforyou.jobservice.domain.Job;
 import com.careersforyou.jobservice.domain.JobRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class InMemoryJobRepository implements JobRepository {

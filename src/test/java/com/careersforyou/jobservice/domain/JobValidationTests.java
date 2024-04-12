@@ -6,19 +6,19 @@ import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 import java.util.Set;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
-
-public class BookValidationTests {
+public class JobValidationTests {
 
     private static Validator validator;
 
     @BeforeAll
     static void setUp() {
-
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory(); validator = factory.getValidator();
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
     }
 
     @Test
@@ -30,14 +30,23 @@ public class BookValidationTests {
         assertThat(violations).isEmpty();
     }
 
-    @Test // Run a test
-    void whenIsbnDefinedButIncorrectThenValidationFails() {
+    @Test //Test whether JobId format is correct
+    void whenJobIdDefinedButIncorrectThenValidationFails() {
 
-        var job = new Job("a234567890", "Title", "Author", "Blegh", "Blegh", "Blegh");
+        var job = new Job("a1", "Title", "Author", "Blegh", "Blegh", "Blegh");
 
         Set<ConstraintViolation<Job>> violations = validator.validate(job);
         assertThat(violations).hasSize(1);
-        assertThat(violations.iterator().next().getMessage()).isEqualTo("The ISBN format must be valid.");
+        assertThat(violations.iterator().next().getMessage()).isEqualTo("The Job ID format must be valid.");
     }
 
+    @Test //Test whether JobId is null
+    void whenJobNotDefinedThenValidationFails(){
+
+        var job = new Job(null, "Title", "Author", "Blegh", "Blegh", "Blegh");
+
+        Set<ConstraintViolation<Job>> violations = validator.validate(job);
+        assertThat(violations).hasSize(1);
+        assertThat(violations.iterator().next().getMessage()).isEqualTo("Job ID cannot be empty");
+    }
 }
