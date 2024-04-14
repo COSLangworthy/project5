@@ -8,6 +8,7 @@ public record Job(
 
         //Check if JobID is null
         @NotBlank(message = "Job ID cannot be empty")
+        //Check if JodID format is correct
         @Pattern(regexp = "\\d{10}", message = "The Job ID format must be valid.")
         String jobid,
         String title,
