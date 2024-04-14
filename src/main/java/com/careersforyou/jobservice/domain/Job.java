@@ -2,7 +2,6 @@ package com.careersforyou.jobservice.domain;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.NotBlank;
 
 public record Job(
 
